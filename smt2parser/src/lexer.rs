@@ -338,6 +338,48 @@ where
                     )),
                 }
             }
+            // Negative Number literals
+            Some(_sign @ b'-') => {
+
+                let mut numerator = vec![];
+                self.consume_byte();
+                while let Some(c) = self.peek_byte() {
+                    if !is_digit_byte(*c) {
+                        break;
+                    }
+                    numerator.push(*c);
+                    self.consume_byte();
+                }
+                if numerator.len() == 0 { return None };
+                if numerator.len() > 1 && numerator.starts_with(b"0") {
+                    return None;
+                }
+                let numerator = String::from_utf8(numerator).unwrap();
+                match self.peek_byte() {
+                    Some(b'.') => {
+                        self.consume_byte();
+                        let mut denumerator = Vec::new();
+                        while let Some(c) = self.peek_byte() {
+                            if !is_digit_byte(*c) {
+                                break;
+                            }
+                            denumerator.push(*c);
+                            self.consume_byte();
+                        }
+                        if denumerator.is_empty() {
+                            return None;
+                        }
+                        let denumerator = String::from_utf8(denumerator).unwrap();
+                        let num =
+                            num::BigInt::from_str_radix(&(numerator + &denumerator), 10).ok()?;
+                        let denom = num::BigInt::from(10u32).pow(denumerator.len() as u32);
+                        Some(Token::Decimal(-Decimal::new(num, denom)))
+                    }
+                    _ => Some(Token::Numeral(
+                        Numeral::from_str_radix(&numerator, 10).ok()?,
+                    )),
+                }
+            }
             // Keywords
             Some(b':') => {
                 self.consume_byte();

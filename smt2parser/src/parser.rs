@@ -391,11 +391,11 @@ pub(crate) mod tests {
 
     #[test]
     fn test_assert_term() {
-        let value = parse_tokens(Lexer::new(&b"(assert 12)"[..])).unwrap();
+        let value = parse_tokens(Lexer::new(&b"(assert -12.0)"[..])).unwrap();
         assert_eq!(
             value,
             Command::Assert {
-                term: Term::Constant(Constant::Numeral(num::BigUint::from(12u32))),
+                term: Term::Constant(Constant::Decimal(crate::Decimal::from_float(-12.0).unwrap())),
             }
         );
 
