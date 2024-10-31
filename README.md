@@ -4,7 +4,9 @@
 [![License](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE-APACHE)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE-MIT)
 
-This project aims to develop Rust libraries and tools around the [SMT-LIB-2
+This project is a fork of [smt2utils](https://github.com/facebookarchive/smt2utils).
+
+It aims to develop Rust libraries and tools around the [SMT-LIB-2
 standard](http://smtlib.cs.uiowa.edu/language.shtml).
 
 The SMT-LIB-2 format (SMT2 for short) is the reference input format for many SMT solvers such
@@ -13,13 +15,10 @@ as Z3 and CVC4.
 ## Content
 
 * [smt2parser](smt2parser) is generic parsing library for SMT2 commands.
-
 * [smt2proxy](smt2proxy) is an experimental tool to intercept and pre-process SMT2
   commands before they are sent to an SMT solver.
-
 * [z3tracer](z3tracer) is an experimental library and tool to process Z3 logs obtained by
   passing the options `trace=true proof=true`.
-
 * [smt2patch](smt2patch) is an experimental library and tool to modify SMT files.
 
 The code in this repository is still under active development.
