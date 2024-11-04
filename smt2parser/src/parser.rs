@@ -435,7 +435,7 @@ pub(crate) mod tests {
                                         symbol: Symbol("x".into())
                                     }
                                 }),
-                                Term::Constant(Constant::Numeral(num::BigUint::from(2u32)))
+                                Term::Constant(Constant::Numeral(num::BigInt::from(2u32)))
                             ]
                         }
                     )],
@@ -451,7 +451,7 @@ pub(crate) mod tests {
                                     symbol: Symbol("x".into())
                                 }
                             }),
-                            Term::Constant(Constant::Numeral(num::BigUint::from(3u32)))
+                            Term::Constant(Constant::Numeral(num::BigInt::from(3u32)))
                         ]
                     }),
                 }

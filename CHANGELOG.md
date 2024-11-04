@@ -1,3 +1,3 @@
 # Change Log
 
-* accept negative float numbers
+* accept negative float and integer numbers

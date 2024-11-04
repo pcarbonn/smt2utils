@@ -373,10 +373,10 @@ where
                         let num =
                             num::BigInt::from_str_radix(&(numerator + &denumerator), 10).ok()?;
                         let denom = num::BigInt::from(10u32).pow(denumerator.len() as u32);
-                        Some(Token::Decimal(-Decimal::new(num, denom)))
+                        Some(Token::Decimal(- Decimal::new(num, denom)))
                     }
                     _ => Some(Token::Numeral(
-                        Numeral::from_str_radix(&numerator, 10).ok()?,
+                        - Numeral::from_str_radix(&numerator, 10).ok()?,
                     )),
                 }
             }

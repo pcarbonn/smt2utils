@@ -39,7 +39,7 @@ pub mod stats;
 pub mod visitors;
 
 /// SMT2 numeral values.
-pub type Numeral = num::bigint::BigUint;
+pub type Numeral = num::bigint::BigInt;
 /// SMT2 decimal values.
 pub type Decimal = num::rational::BigRational;
 /// A base-16 digit.
