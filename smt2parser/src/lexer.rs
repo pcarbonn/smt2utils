@@ -340,9 +340,20 @@ where
             }
             // Negative Number literals
             Some(_sign @ b'-') => {
+                let negation = _sign.clone();
+                self.consume_byte();
+
+                // it's a token if followed by space
+                if let Some(c) = self.peek_byte() {
+                    if matches!(*c, b' ' | b'\n' | b'\t' | b'\r') {
+                        match String::from_utf8(vec![negation]) {
+                            Ok(s) => return Some(Token::Symbol(s)),
+                            Err(_) => return None
+                        }
+                    }
+                }
 
                 let mut numerator = vec![];
-                self.consume_byte();
                 while let Some(c) = self.peek_byte() {
                     if !is_digit_byte(*c) {
                         break;
